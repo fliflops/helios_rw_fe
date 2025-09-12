@@ -1,0 +1,1 @@
+export {default as Principal} from './pages/Principal'

@@ -1,0 +1,1 @@
+export {default as PODView} from './pages/PodViewPage'
