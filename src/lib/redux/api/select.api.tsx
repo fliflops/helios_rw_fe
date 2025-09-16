@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {apiSlice} from '../api';
 
-export type routes = 'role' | 'user' | 'user-location' | 'ship-point' |'principal'          
+export type routes = 'role' | 'user' | 'user-location' | 'ship-point' |'principal' | 'service-type'          
     
 
 export const {

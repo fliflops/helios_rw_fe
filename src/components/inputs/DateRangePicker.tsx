@@ -27,7 +27,8 @@ const DateRangePicker = (props: dateRangeType) =>  {
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button size={'sm'} id="date-picker">
-            <span>{moment(props.dateRange?.from).format('YYYY-MM-DD')} - {moment(props.dateRange?.to).format('YYYY-MM-DD')} </span>
+              {!props.dateRange ? 'From - To' : <span>{moment(props.dateRange?.from).format('YYYY-MM-DD')} - {moment(props.dateRange?.to).format('YYYY-MM-DD')} </span>
+            }
               <CalendarIcon className="size-3.5" />      
             </Button>
           </PopoverTrigger>

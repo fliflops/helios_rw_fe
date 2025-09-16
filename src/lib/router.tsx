@@ -10,7 +10,8 @@ import PageIndex from "@/components/PageIndex";
 import {Barcode, GenerateBarcode} from '@/features/utility/barcode'
 import { ShipPoint } from "@/features/data-management/ship-point";
 import { Principal } from "@/features/data-management/principal";
-import { PODView } from "@/features/pod-view";
+import { PODView } from '@/features/pod-transactions/pod-view';
+import { PodSortingFilterPage } from "@/features/pod-transactions/pod-sorting";
 
 const route = createBrowserRouter([
     {
@@ -26,7 +27,7 @@ const route = createBrowserRouter([
                     )
                 }
             },
-           //**POD Management */
+            //**POD Management */
             {
                 path: '/pod',
                 element: <PODView/>,
@@ -36,6 +37,23 @@ const route = createBrowserRouter([
                     )
                 }
             },
+            {
+                path:'/pod-sorting',
+                element: <PageIndex/>,
+                handle:{
+                    crumb: () => (
+                        <Link path='/pod-sorting' label="POD Sorting"/>
+                    )
+                },
+                children:[
+                    {
+                        index: true,
+                        element: <PodSortingFilterPage/>,
+                    }
+                ]
+                
+            },
+            //admin
             {
                 path:'/user',
                 element: <User/>,
@@ -78,6 +96,7 @@ const route = createBrowserRouter([
                     }
                 ]
             },
+            //data management
             {
                 path:'/location',
                 element: <PageIndex/>,
