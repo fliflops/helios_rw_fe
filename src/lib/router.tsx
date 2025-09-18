@@ -12,6 +12,8 @@ import { ShipPoint } from "@/features/data-management/ship-point";
 import { Principal } from "@/features/data-management/principal";
 import { PODView } from '@/features/pod-transactions/pod-view';
 import { PodSortingFilterPage } from "@/features/pod-transactions/pod-sorting";
+import ShipPointUpdate from "@/features/data-management/ship-point/pages/ShipPointUpdate";
+import PrincipalUpdate from "@/features/data-management/principal/pages/PrincipalUpdate";
 
 const route = createBrowserRouter([
     {
@@ -157,6 +159,15 @@ const route = createBrowserRouter([
                     {
                         index:true,
                         element: <ShipPoint/>
+                    },
+                    {
+                        path:':id',
+                        element: <ShipPointUpdate/>,
+                        handle: {
+                            crumb: (path:string) => (
+                                <Link path={path} label='Update Ship Point'/>
+                            )
+                        }
                     }
                 ]
             },
@@ -172,6 +183,15 @@ const route = createBrowserRouter([
                     {
                         index:true,
                         element: <Principal/>
+                    },
+                    {
+                        path:':id',
+                        element: <PrincipalUpdate/>,
+                        handle: {
+                            crumb: (path:string) => (
+                                <Link path={path} label='Update Principal'/>
+                            )
+                        }
                     }
                 ]
             }
