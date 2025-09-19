@@ -1,16 +1,14 @@
-import * as yup from 'yup';
+import z from "zod"
 
-export const updateLocationSchema = yup.object({
-    location_name: yup.string().required(),
-    location_status: yup.boolean().required(),
-    users: yup.array().of(yup.object().shape({
-        db_id: yup.string().required(),
-        fk_location: yup.string().required(),
-        fk_user_id: yup.string().required(),
-        location_name: yup.string().required(),
-        email: yup.string().required(),
-        is_active: yup.boolean().required() 
-    }))
+export const createLocationSchema = z.object({
+    id: z.string().uuid().nullable().optional(),
+    loc_name: z.string(),
+    loc_code: z.string(),
+    is_active: z.boolean()
 })
 
-export type updateLocationType = yup.InferType<typeof updateLocationSchema>
+export const updateLocationSchema = createLocationSchema.partial().omit({ id: true })
+
+export type createLocationType = z.infer<typeof createLocationSchema>
+export type updateLocationType = z.infer<typeof updateLocationSchema>
+export type locationTable = z.infer<typeof createLocationSchema>

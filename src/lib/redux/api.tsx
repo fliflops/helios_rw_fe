@@ -18,7 +18,7 @@ const baseQuery = fetchBaseQuery({
 export const apiSlice = createApi({
     reducerPath: 'apiSlice',
     baseQuery: baseQuery,
-    tagTypes: ['Table','Session','Location'],
+    tagTypes: ['Table','Session','Location','ShipPoint', 'Principal'],
     endpoints: () => ({})
 })
 
@@ -35,7 +35,11 @@ export const errorHandler: Middleware =
             }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }) = action.payload as any;
-        toast.error(payload.data.message)
+        let msg = "Unable to connect to server";
+        if (payload.data && payload.data.message) {
+            msg = payload.data.message
+        }
+        toast.error(msg)
     }
     return next(action)
 } 

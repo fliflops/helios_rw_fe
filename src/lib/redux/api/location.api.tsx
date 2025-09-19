@@ -2,21 +2,23 @@ import {apiSlice} from '../api';
 import {updateLocationType} from '@/features/data-management/location/types';
 
 type locationDetails = {
-    location_id: string;
-    location_name: string;
-    location_status: string;
-    users: []
+    id: string;
+    loc_code: string;
+    loc_name: string;
+    is_active: boolean;
 }
 
 export const {
     useCreateLocationMutation, 
     useUpdateLocationMutation,
+    useLazyGetLocationQuery,
     useGetLocationQuery
 } = apiSlice.injectEndpoints({
     endpoints: builder => ({
         createLocation: builder.mutation<void, {
-            location_name: string;
-            location_status: string;
+            loc_name: string;
+            loc_code: string;
+            is_active: boolean;
         }>({
             query: (args) => ({
                 url: '/location',
@@ -27,16 +29,16 @@ export const {
         }),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         getLocation: builder.query<locationDetails, string>({
-            query: (location_id) => ({
-                url: '/location/details/'+location_id,
+            query: (id) => ({
+                url: '/location/details/'+id,
                 method: 'GET',
             }),
             transformResponse: (result: locationDetails) => result,
             providesTags: ['Location']
         }),
-        updateLocation: builder.mutation<void, updateLocationType & {location_id: string}>({
+        updateLocation: builder.mutation<void, updateLocationType & {id: string}>({
             query: (args) => ({
-                url:'/location/details/'+args.location_id,
+                url:'/location/details/'+args.id,
                 method: 'PUT',
                 body: args
             }),
