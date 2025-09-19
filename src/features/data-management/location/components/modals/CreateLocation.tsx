@@ -35,16 +35,16 @@ const CreateLocation: React.FC<CreateLocationProps> = (props) => {
             loc_code: values.loc_code,
             is_active: values.is_active
         })
-        .unwrap()
-        .then(() => {
-            form.reset({
-                loc_code: '',
-                loc_name: '',
-                is_active: true
-            })
+            .unwrap()
+            .then(() => {
+                form.reset({
+                    loc_code: '',
+                    loc_name: '',
+                    is_active: true
+                })
 
-            toast.success('Location Created')
-        })
+                toast.success('Location Created')
+            })
     }
 
     return (
@@ -57,20 +57,18 @@ const CreateLocation: React.FC<CreateLocationProps> = (props) => {
                                 <CardTitle>Create Location</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className='grid grid-cols-1 gap-2'>
-                                    <FormField
+                                <div className='grid grid-cols-1 gap-4'>
+                                    <FormInput
                                         control={form.control}
                                         name='loc_name'
-                                        render={({ field }) => (
-                                            <FormInput {...field} label='Location' placeholder='Location' />
-                                        )}
+                                        label='Location'
+                                        placeholder='Location'
                                     />
-                                    <FormField
+                                    <FormInput
                                         control={form.control}
                                         name='loc_code'
-                                        render={({ field }) => (
-                                            <FormInput {...field} label='Code' placeholder='Code' />
-                                        )}
+                                        label='Code'
+                                        placeholder='Code'
                                     />
                                     <FormField
                                         control={form.control}

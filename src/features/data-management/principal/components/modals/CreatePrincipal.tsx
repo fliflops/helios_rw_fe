@@ -40,12 +40,12 @@ const CreatePrincipal: React.FC<CreatePrincipalProps> = (props) => {
     const handleSubmit = async (values: createPrincipalType) => {
         if (!isLoading) {
             await onCreate(values)
-            .unwrap()
-            .then(() => {
-                form.reset(defaultValues)
+                .unwrap()
+                .then(() => {
+                    form.reset(defaultValues)
 
-                toast.success('Principal Created')
-            })
+                    toast.success('Principal Created')
+                })
         }
     }
 
@@ -59,34 +59,30 @@ const CreatePrincipal: React.FC<CreatePrincipalProps> = (props) => {
                                 <CardTitle>Create Principal</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className='grid grid-cols-1 gap-2'>
-                                    <FormField
+                                <div className='grid grid-cols-1 gap-4'>
+                                    <FormInput
                                         control={form.control}
                                         name='customer_code'
-                                        render={({ field }) => (
-                                            <FormInput {...field} label='ID' placeholder='ID / Code' />
-                                        )}
+                                        label='ID'
+                                        placeholder='ID / Code'
                                     />
-                                    <FormField
+                                    <FormInput
                                         control={form.control}
                                         name='customer_name'
-                                        render={({ field }) => (
-                                            <FormInput {...field} label='Name' placeholder='Name' />
-                                        )}
+                                        label='Name'
+                                        placeholder='Name'
                                     />
-                                    <FormField
+                                    <FormInput
                                         control={form.control}
                                         name='customer_desc'
-                                        render={({ field }) => (
-                                            <FormInput {...field} label='Description' placeholder='Description' />
-                                        )}
+                                        label='Description'
+                                        placeholder='Description'
                                     />
-                                    <FormField
+                                    <FormInput
                                         control={form.control}
                                         name='customer_address'
-                                        render={({ field }) => (
-                                            <FormInput {...field} label='Address' placeholder='Address' />
-                                        )}
+                                        label='Address'
+                                        placeholder='Address'
                                     />
                                     <FormField
                                         control={form.control}

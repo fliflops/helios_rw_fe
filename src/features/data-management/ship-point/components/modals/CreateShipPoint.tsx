@@ -68,33 +68,29 @@ const CreateShipPoint: React.FC<CreateShipPointProps> = (props) => {
                             </CardHeader>
                             <CardContent>
                                 <div className='grid grid-cols-1 gap-2'>
-                                    <FormField
+                                    <FormInput
                                         control={form.control}
                                         name='ship_point_code'
-                                        render={({ field }) => (
-                                            <FormInput {...field} label='Ship Point ID' placeholder='Ship Point ID' />
-                                        )}
+                                        label='Ship Point ID'
+                                        placeholder='Ship Point ID'
                                     />
-                                    <FormField
+                                    <FormInput
                                         control={form.control}
                                         name='ship_point_desc'
-                                        render={({ field }) => (
-                                            <FormInput {...field} label='Description' placeholder='Description' />
-                                        )}
+                                        label='Description'
+                                        placeholder='Description'
                                     />
-                                    <FormField
+                                    <FormInput
                                         control={form.control}
                                         name='ship_point_address'
-                                        render={({ field }) => (
-                                            <FormInput {...field} label='Address' placeholder='Address' />
-                                        )}
+                                        label='Address'
+                                        placeholder='Address'
                                     />
-                                    <FormField
+                                    <FormInput
                                         control={form.control}
                                         name='ship_pt_zone'
-                                        render={({ field }) => (
-                                            <FormInput {...field} label='Ship Point Zone' placeholder='Ship Point Zone' />
-                                        )}
+                                        label='Ship Point Zone'
+                                        placeholder='Ship Point Zone'
                                     />
                                     <FormField
                                         control={form.control}
