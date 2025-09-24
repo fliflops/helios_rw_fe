@@ -5,11 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Form, FormField } from '@/components/ui/form';
 import FormInput from '@/components/form/FormInput';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import FormCheckbox from '@/components/form/FormCheckbox';
 import { useCreateLocationMutation } from '@/lib/redux/api/location.api';
 import { toast } from 'react-toastify';
+import { createLocationSchema, createLocationType } from '../../types';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 
 interface CreateLocationProps {
@@ -17,42 +17,38 @@ interface CreateLocationProps {
     isOpen: boolean;
 }
 
-const createLocationSchema = yup.object({
-    location_name: yup.string().required(),
-    location_status: yup.boolean().required()
-})
-
-type createLocationType = yup.InferType<typeof createLocationSchema>
-
 const CreateLocation: React.FC<CreateLocationProps> = (props) => {
-    const [onCreate, {isLoading}] = useCreateLocationMutation();
-    
+    const [onCreate, { isLoading }] = useCreateLocationMutation();
+
     const form = useForm<createLocationType>({
-        resolver: yupResolver(createLocationSchema),
+        resolver: zodResolver(createLocationSchema),
         defaultValues: {
-            location_name: '',
-            location_status: true
+            loc_code: '',
+            loc_name: '',
+            is_active: true
         }
     })
 
-    const handleSubmit = async(values:createLocationType) => {
+    const handleSubmit = async (values: createLocationType) => {
         await onCreate({
-            location_name: values.location_name,
-            location_status: values.location_status ? 'ACTIVE' : 'INACTIVE'
+            loc_name: values.loc_name,
+            loc_code: values.loc_code,
+            is_active: values.is_active
         })
-        .unwrap()
-        .then(() => {
-            form.reset({
-                location_name:'',
-                location_status: true
-            })
+            .unwrap()
+            .then(() => {
+                form.reset({
+                    loc_code: '',
+                    loc_name: '',
+                    is_active: true
+                })
 
-            toast.success('Location Created')
-        })
+                toast.success('Location Created')
+            })
     }
-    
+
     return (
-        <Dialog open={props.isOpen} onClose={()=>{}}>
+        <Dialog open={props.isOpen} onClose={() => { }}>
             <DialogPanel>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(handleSubmit)}>
@@ -61,20 +57,24 @@ const CreateLocation: React.FC<CreateLocationProps> = (props) => {
                                 <CardTitle>Create Location</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className='grid grid-cols-1 gap-2'>
+                                <div className='grid grid-cols-1 gap-4'>
+                                    <FormInput
+                                        control={form.control}
+                                        name='loc_name'
+                                        label='Location'
+                                        placeholder='Location'
+                                    />
+                                    <FormInput
+                                        control={form.control}
+                                        name='loc_code'
+                                        label='Code'
+                                        placeholder='Code'
+                                    />
                                     <FormField
                                         control={form.control}
-                                        name='location_name'
-                                        render={({field}) => (
-                                            <FormInput {...field} label='Location' placeholder='Location'/>
-                                        )}
-                                    />
-
-                                    <FormField
-                                        control = {form.control}
-                                        name='location_status'
-                                        render={({field}) => (
-                                            <FormCheckbox label='Is Active' checked={field.value} onCheckedChange={field.onChange}/>
+                                        name='is_active'
+                                        render={({ field }) => (
+                                            <FormCheckbox label='Is Active' checked={field.value} onCheckedChange={field.onChange} />
                                         )}
                                     />
                                 </div>
