@@ -29,7 +29,7 @@ function APITable <TData, TValue>({columns,route,...props}: APITableProps<TData,
     
     return <DataTable
         columns={columns}
-        data={data.rows ?? []}
+        data={data.rows ?? data ?? []}
         setPagination={setPagination}
         pageCount={data.pageCount}
         count={data.count}
