@@ -14,6 +14,7 @@ import { apiSlice, errorHandler } from './api'
 import tripSlice from './slices/trip.slice';
 import authSlice from './slices/auth.slice';
 import filterSlice from './slices/filter.slice';
+import podSortSlice from './slices/pod-sort.slice';
 
 
 const persistConfig = {
@@ -28,7 +29,8 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: persistReducer(persistConfig, authSlice),
     tripSlice: tripSlice,
-    filterSlice: filterSlice
+    filterSlice: filterSlice,
+    podSortSlice: podSortSlice 
 
   }),
   middleware: (getDefaultMiddleware) => 

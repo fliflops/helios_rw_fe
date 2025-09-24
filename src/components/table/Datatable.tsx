@@ -35,7 +35,7 @@ interface DatatableProps<TData, TValue> {
     manualPagination?: boolean;
     isLoading?: boolean;
     setPagination?: OnChangeFn<PaginationState>,
-    refetch: () => void, 
+    refetch?: () => void, 
     handleSearch?: (search: string) => void,
     state?:{
         pagination?: PaginationState
@@ -83,7 +83,7 @@ function DataTable<TData,TValue>({
             <div className='flex justify-between pb-1'>
                 <div className='flex gap-1'>
                     <Input className='h-8' placeholder='Search' onChange={handleSearch} value={searchValue}/> 
-                    <Button isLoading={props.isLoading} variant={'ghost'} className='h-8' size='icon' onClick={() => props.refetch()} >{props.isLoading ? null : <RefreshCw className='text-gray-600 h-3'/>}</Button>
+                    <Button isLoading={props.isLoading} variant={'ghost'} className='h-8' size='icon' onClick={() => props.refetch ? props.refetch() : null} >{props.isLoading ? null : <RefreshCw className='text-gray-600 h-3'/>}</Button>
                 </div>
                 <label className='font-sans text-sm font-semibold self-end'>Total Rows: {props.manualPagination ? props.count : data.length}</label>
             </div>

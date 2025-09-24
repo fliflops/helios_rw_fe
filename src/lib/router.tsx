@@ -11,7 +11,7 @@ import {Barcode, GenerateBarcode} from '@/features/utility/barcode'
 import { ShipPoint } from "@/features/data-management/ship-point";
 import { Principal } from "@/features/data-management/principal";
 import { PODView } from '@/features/pod-transactions/pod-view';
-import { PodSortingFilterPage } from "@/features/pod-transactions/pod-sorting";
+import { PodSortingFilterPage, BarcodeAssignment } from "@/features/pod-transactions/pod-sorting";
 
 const route = createBrowserRouter([
     {
@@ -49,6 +49,15 @@ const route = createBrowserRouter([
                     {
                         index: true,
                         element: <PodSortingFilterPage/>,
+                    },
+                    {
+                        path:'assign-barcode',
+                        element: <BarcodeAssignment/>,
+                        handle:{
+                            crumb: (path:string) => (
+                                <Link path={path} label="Barcode Assignment"/>
+                            )
+                        }
                     }
                 ]
                 
