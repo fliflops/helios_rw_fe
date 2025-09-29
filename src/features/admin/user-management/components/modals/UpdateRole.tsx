@@ -35,6 +35,7 @@ const UpdateRole: React.FC<UpdateRoleProps> = (props) => {
             })
 
             toast.success('Role Updated')
+            props.onClose()
         })
     }
 
