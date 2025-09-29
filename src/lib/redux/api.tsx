@@ -33,10 +33,15 @@ export const errorHandler: Middleware =
         const payload:({
             data:{
                 message: string;
-            }
+            },
+            originalStatus: number;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }) = action.payload as any;
+        
         let msg = "Unable to connect to server";
+        if (payload.originalStatus === 404) {
+            msg = "Resource not found"
+        }
         if (payload.data && payload.data.message) {
             msg = payload.data.message
         }

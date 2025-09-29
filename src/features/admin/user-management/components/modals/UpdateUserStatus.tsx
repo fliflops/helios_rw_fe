@@ -19,7 +19,7 @@ const UpdateUserStatus: React.FC<UpdateUserStatusProps> = (props) => {
     const handleUpdate = async() => {
         await updateStatus({
             id: context.state.id as string,
-            is_active: context.state.is_active === 1 ? 0 : 1
+            is_active: context.state.is_active ? false : true,
         })
         .unwrap()
         .then(() => {
@@ -35,7 +35,7 @@ const UpdateUserStatus: React.FC<UpdateUserStatusProps> = (props) => {
                     <CardTitle>Update Account Status</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p>Do you wish to <span className='font-semibold'>{context.state.is_active === 1 ? 'DEACTIVATE' : 'ACTIVATE'}</span> <span className='font-semibold'>{context.state.username}</span> account status?</p>
+                    <p>Do you wish to <span className='font-semibold'>{context.state.is_active ? 'DEACTIVATE' : 'ACTIVATE'}</span> <span className='font-semibold'>{context.state.username}</span> account status?</p>
                 </CardContent>
                 <CardFooter className='flex justify-between'>
                     <Button variant={'destructive'} onClick={props.onClose} disabled={updateStatusProps.isLoading}>No</Button>

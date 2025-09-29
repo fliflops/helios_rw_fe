@@ -3,10 +3,10 @@ import React,{createContext, Dispatch, SetStateAction} from 'react'
 interface SelectedUserInterface {
     id:string;
     username: string;
-    app_key: string;  
-    is_active: number;
+    app_key?: string;  
+    is_active: boolean;
     role_name: string;
-    role_id: string;
+    role_id?: string;
 }
 
 
