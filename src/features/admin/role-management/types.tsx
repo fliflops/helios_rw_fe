@@ -1,6 +1,6 @@
 import {roleCreateSchema} from './validations'
-import * as yup from 'yup';
+import * as z from 'zod';
 
-export type roleCreateType = yup.InferType<typeof roleCreateSchema> 
+export type roleCreateType = z.infer<typeof roleCreateSchema> 
 export type roleSubModuleTypes = roleCreateType['modules'];
 

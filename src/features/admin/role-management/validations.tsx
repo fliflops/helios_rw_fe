@@ -1,18 +1,18 @@
-import * as yup from 'yup';
+import * as z from 'zod';
 
-export const roleCreateSchema = yup.object({
-    role_name: yup.string().required(),
-    is_active: yup.boolean().required(),
-    is_admin: yup.boolean().required(),
-    modules: yup.array().of(yup.object().shape({
-        id: yup.string(),
-        header_key: yup.string().required(),
-        module_key: yup.string().required(),
-        module_name: yup.string().required(),
-        view: yup.bool(),
-        create: yup.bool(),
-        edit: yup.bool(),
-        export: yup.bool()
-    })).required()
+export const roleCreateSchema = z.object({
+    role_name: z.string(),
+    is_active: z.boolean(),
+    is_admin: z.boolean(),
+    modules: z.array(z.object({
+        id: z.string().optional().nullable(),
+        role_id: z.string().optional().nullable(),
+        header_key: z.string(),
+        module_key: z.string(),
+        module_name: z.string(),
+        view: z.boolean(),
+        create: z.boolean(),
+        edit: z.boolean(),
+        export: z.boolean()
+    }))
 })
-
