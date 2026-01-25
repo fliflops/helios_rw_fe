@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from '../store'
-import { filterFormValues } from '@/features/pod-view/validations'
+import { filterFormValues } from '@/features/pod-transactions/pod-view/validations'
 import moment from 'moment'
 import { barcodeFilterType } from '@/features/utility/barcode/validations'
 
@@ -12,7 +12,10 @@ type filterSliceType= {
             to: string
         } 
     },
-    view_barcode: barcodeFilterType
+    view_barcode: barcodeFilterType,
+    default: {
+        search: string;
+    } 
 }
 
 const initialState: filterSliceType = {
@@ -34,6 +37,9 @@ const initialState: filterSliceType = {
         search:'',
         location: null,
         is_assigned: null
+    },
+    default: {
+        search:''
     }
 }
 
@@ -46,12 +52,16 @@ export const filterSlice = createSlice({
         },
         setViewBarcodeFilter: (state, action: PayloadAction<filterSliceType['view_barcode']>) => {
             state.view_barcode = action.payload
+        },
+        setViewSearchFilter: (state, action: PayloadAction<filterSliceType['default']>) => {
+            state.default = action.payload
         }
     }
 })
 
 export const getViewPODFilters = (state: RootState) => state.filterSlice.view_pod
 export const getViewBarcodeFilters = (state: RootState) => state.filterSlice.view_barcode
+export const getViewSearch = (state: RootState) => state.filterSlice.default
 
-export const {setViewPODFilter, setViewBarcodeFilter} = filterSlice.actions;
+export const {setViewPODFilter, setViewBarcodeFilter, setViewSearchFilter} = filterSlice.actions;
 export default filterSlice.reducer

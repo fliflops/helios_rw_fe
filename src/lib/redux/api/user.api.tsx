@@ -12,7 +12,7 @@ type updateUser = {
     role_id?: string;
     app_key?: string;
     user_password?: string;
-    is_active?: number;
+    is_active?: boolean;
 }
 
 type routes = {
@@ -28,6 +28,7 @@ export const {
     useGenerateAppKeyMutation, 
     useCreateUserMutation, 
     useUpdateUserMutation,
+    useResetPasswordMutation,
     useUpdatePasswordMutation,
     useGetRedisSessionQuery,
     useGetAssignedRoutesQuery,
@@ -55,6 +56,14 @@ export const {
                 url: '/user/details/'+id,
                 method: 'PUT',
                 body: args,
+            }),
+            invalidatesTags:['Table']
+        }),
+        resetPassword: builder.mutation<void, {id: string}> ({
+            query: ({id, ...args}) => ({
+                url: '/user/reset-password/'+id,
+                method: 'PUT',
+                body:args
             }),
             invalidatesTags:['Table']
         }),

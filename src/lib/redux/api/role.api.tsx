@@ -25,14 +25,13 @@ export const {useGetRoutesQuery, useCreateRoleMutation, useGetRoleQuery, useUpda
             transformResponse: (result:roleCreateType ) => {
                 const {modules,...role} =  result;
                 let tempModules: roleCreateType['modules']= [];
-
                 defaultModules.forEach(d => {
                     const sub = d.modules;
                     tempModules = tempModules.concat(sub.map(s => {
                         const access = modules.find(m => m.module_key === s.module_key) 
                         return {
-                            db_id: access?.id,
-                            header_key: access?.header_key as string,
+                            role_id: access?.role_id,
+                            header_key: access?.header_key as string ?? d.header_id,
                             module_key: s.module_key,
                             module_name: s.module_name,
                             view: access?.view as boolean,
